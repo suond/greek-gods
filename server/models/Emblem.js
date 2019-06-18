@@ -10,7 +10,7 @@ const EmblemSchema = new Schema({
     },
     gods: [{
         type: Schema.Types.ObjectId,
-        refs: "god"
+        ref: "god"
     }]
 })
 
