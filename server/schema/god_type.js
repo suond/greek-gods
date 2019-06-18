@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList } = graphql;
+
 const AbodeType = require("./abode_type")
 const EmblemType = require("./emblem_type")
-const God = require("../models/God")
+const Abode = mongoose.model("abode")
+const God = mongoose.model("god");
 
 const GodType = new GraphQLObjectType({
   name: "GodType",
@@ -17,7 +19,7 @@ const GodType = new GraphQLObjectType({
     domains: { type: new GraphQLList(GraphQLString) },
     abode: {
       // Gods only have one abode
-      type: AbodeType,
+      type: require("./abode_type"),
       resolve(parentValue) {
         return Abode.findById(parentValue.abode)
           .then(abode => abode)
